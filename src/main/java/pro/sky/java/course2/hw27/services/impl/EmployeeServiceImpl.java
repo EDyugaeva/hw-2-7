@@ -1,7 +1,6 @@
 package pro.sky.java.course2.hw27.services.impl;
 
 import org.springframework.stereotype.Service;
-
 import pro.sky.java.course2.hw27.data.Employee;
 import pro.sky.java.course2.hw27.exceptions.EmployeeExistException;
 import pro.sky.java.course2.hw27.exceptions.EmployeeNotFoundException;
@@ -9,6 +8,7 @@ import pro.sky.java.course2.hw27.services.EmployeeService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -18,7 +18,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeServiceImpl() {
         employees = new HashMap<>();
     }
-
 
 
     public Employee addEmployee(String firstName, String lastName, String passportNum) {
@@ -33,12 +32,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee removeEmployee(String firstName, String lastName, String passportNum) {
-        Employee removedEmployee = new Employee(firstName, lastName);
         if (!employees.containsKey(passportNum)) {
             throw new EmployeeNotFoundException("Сотрудник не найден");
         }
-        employees.remove(passportNum, removedEmployee);
-        return removedEmployee;
+        return employees.remove(passportNum);
     }
 
 
@@ -47,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (!employees.containsKey(passportNum)) {
             throw new EmployeeNotFoundException("Сотрудник не найден");
         }
-            return employees.get(passportNum);
+        return employees.get(passportNum);
 
     }
 
@@ -55,6 +52,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Map<String, Employee> getMap() {
         return employees;
     }
+
+    public Set<Employee> getAllEmployee() {
+        return (Set<Employee>) employees.values();
+    }
+
+
+
 
 
 }
