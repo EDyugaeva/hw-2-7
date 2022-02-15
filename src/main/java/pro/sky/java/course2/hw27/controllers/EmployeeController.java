@@ -1,9 +1,6 @@
 package pro.sky.java.course2.hw27.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.java.course2.hw27.data.Employee;
 import pro.sky.java.course2.hw27.services.EmployeeService;
 
@@ -19,12 +16,19 @@ public class EmployeeController {
         this.employeeService = employeeServiceCollection;
     }
 
-    @GetMapping("/add")
+    @GetMapping(path = "/add", params = {"department", "firstName","lastName", "salary", "passportNum"})
     public Employee addEmployee(@RequestParam("firstName") String firstName,
                                 @RequestParam("lastName") String lastName,
                                 @RequestParam("passportNum") String passportNum,
                                 @RequestParam("department") String department,
                                 @RequestParam("salary") int salary) {
+        return employeeService.addEmployee(firstName, lastName, passportNum,department,salary);
+
+    }
+    @GetMapping(path = "/add", params = {"firstName","lastName", "passportNum"})
+    public Employee addEmployee(@RequestParam("firstName") String firstName,
+                                @RequestParam("lastName") String lastName,
+                                @RequestParam("passportNum") String passportNum) {
         return employeeService.addEmployee(firstName, lastName, passportNum);
 
     }

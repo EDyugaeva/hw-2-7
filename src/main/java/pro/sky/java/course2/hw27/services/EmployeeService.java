@@ -9,6 +9,8 @@ import java.util.Set;
 
 public interface EmployeeService {
     Employee addEmployee(String firstName, String lastName, String passportNum);
+    Employee addEmployee(String firstName, String lastName, String passportNum, String department, int salary);
+
 
     Employee removeEmployee(String firstName, String lastName, String passportNum);
 
