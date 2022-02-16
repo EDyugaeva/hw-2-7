@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.java.course2.hw27.data.Employee;
 import pro.sky.java.course2.hw27.exceptions.EmployeeExistException;
 import pro.sky.java.course2.hw27.exceptions.EmployeeNotFoundException;
-import pro.sky.java.course2.hw27.exceptions.WrongTypeOfName;
+import pro.sky.java.course2.hw27.exceptions.WrongTypeOfNameException;
 import pro.sky.java.course2.hw27.services.EmployeeService;
 
 import java.util.HashMap;
@@ -73,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private void checkWrongName(String firstName, String lastName) {
         String chars = "123456789!@#$%^&*()-=,./;'[]{} ";
         if (StringUtils.containsAny(firstName, chars)||StringUtils.containsAny(lastName, chars)) {
-            throw new WrongTypeOfName("Имя сотрудника задано неверно");
+            throw new WrongTypeOfNameException("Имя сотрудника задано неверно");
         }
 
     }
