@@ -16,28 +16,25 @@ public class EmployeeController {
         this.employeeService = employeeServiceCollection;
     }
 
-    @GetMapping(path = "/add", params = {"department", "firstName","lastName", "salary", "passportNum"})
+    @GetMapping(path = "/add", params = {"department", "firstName","lastName", "salary"})
     public Employee addEmployee(@RequestParam("firstName") String firstName,
                                 @RequestParam("lastName") String lastName,
-                                @RequestParam("passportNum") String passportNum,
                                 @RequestParam("department") String department,
                                 @RequestParam("salary") int salary) {
-        return employeeService.addEmployee(firstName, lastName, passportNum,department,salary);
+        return employeeService.addEmployee(firstName, lastName, department,salary);
 
     }
-    @GetMapping(path = "/add", params = {"firstName","lastName", "passportNum"})
+    @GetMapping(path = "/add", params = {"firstName","lastName"})
     public Employee addEmployee(@RequestParam("firstName") String firstName,
-                                @RequestParam("lastName") String lastName,
-                                @RequestParam("passportNum") String passportNum) {
-        return employeeService.addEmployee(firstName, lastName, passportNum);
+                                @RequestParam("lastName") String lastName) {
+        return employeeService.addEmployee(firstName, lastName);
 
     }
 
     @GetMapping("/remove")
     public Employee removeEmployee(@RequestParam("firstName") String firstName,
-                                   @RequestParam("lastName") String lastName,
-                                   @RequestParam("passportNum") String passportNum) {
-        return employeeService.removeEmployee(firstName, lastName, passportNum);
+                                   @RequestParam("lastName") String lastName) {
+        return employeeService.removeEmployee(firstName, lastName);
     }
 
     @GetMapping("/get")
@@ -47,7 +44,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam("passportNum") String passportNum) {
+    public Employee findEmployee(@RequestParam("key") String passportNum) {
         return employeeService.findEmployee(passportNum);
     }
 

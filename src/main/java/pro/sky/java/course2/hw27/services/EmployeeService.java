@@ -4,18 +4,18 @@ package pro.sky.java.course2.hw27.services;
 import pro.sky.java.course2.hw27.data.Employee;
 import pro.sky.java.course2.hw27.exceptions.EmployeeNotFoundException;
 
+import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 public interface EmployeeService {
-    Employee addEmployee(String firstName, String lastName, String passportNum);
-    Employee addEmployee(String firstName, String lastName, String passportNum, String department, int salary);
+    Employee addEmployee(String firstName, String lastName);
+    Employee addEmployee(String firstName, String lastName, String department, int salary);
 
 
-    Employee removeEmployee(String firstName, String lastName, String passportNum);
+    Employee removeEmployee(String firstName, String lastName);
 
-    Employee findEmployee(String passportNum) throws EmployeeNotFoundException;
+    Employee findEmployee(String key) throws EmployeeNotFoundException;
 
     Map<String, Employee> getMap();
-    Set<Employee> getAllEmployee();
+    Collection<Employee> getAllEmployee();
 }
