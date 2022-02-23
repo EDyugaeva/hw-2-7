@@ -6,15 +6,12 @@ import pro.sky.java.course2.hw27.exceptions.EmployeeNotFoundException;
 import pro.sky.java.course2.hw27.services.DepartmentService;
 import pro.sky.java.course2.hw27.services.EmployeeService;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    private  EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public DepartmentServiceImpl(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -22,6 +19,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
     public Employee findEmployeeWithMaxSalaryByDepartmentId(String department) {
+
         return employeeService.getAllEmployee().stream()
                 .filter(e -> e.getDepartment().equals(department))
                 .max(Comparator.comparing(employee -> employee.getSalary()))
@@ -37,9 +35,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Set<Employee> findAllEmployeesInDepartment(String department) {
-        return employeeService.getAllEmployee().stream()
+        Set<Employee> result;
+        result = employeeService.getAllEmployee().stream()
                 .filter(employee -> employee.getDepartment().equals(department))
                 .collect(Collectors.toSet());
+        if (result.isEmpty()) {
+            throw new EmployeeNotFoundException("Сотрудников в данном отделе нет");
+        }
+        return result;
     }
 
     @Override

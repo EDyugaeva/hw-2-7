@@ -7,17 +7,23 @@ public class Employee {
     private final String lastName;
     private final String department;
     private final int salary;
+    private final String key;
 
     public Employee(String firstName, String lastName, String department, int salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
         this.salary = salary;
+        this.key = firstName + lastName;
     }
 
     public Employee(String firstName, String lastName) {
         this(firstName,lastName,"No department", 0);
 
+    }
+
+    public String getKey() {
+        return key;
     }
 
     public String getDepartment() {
@@ -42,12 +48,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+        return salary == employee.salary && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(department, employee.department) && Objects.equals(key, employee.key);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return Objects.hash(firstName, lastName, department, salary, key);
     }
 
     @Override
